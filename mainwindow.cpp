@@ -42,6 +42,7 @@ void MainWindow::on_actionMB4205_triggered()
     ui->actionRandom->setChecked(false);
     _amp->setDataSource(new mb4205());
     _amp->startRead();
+    connect(_amp, SIGNAL(dataRead(double)), ui->doubleSpinBox, SLOT(setValue(double)));
 }
 
 void MainWindow::on_actionAntialiasing_triggered()

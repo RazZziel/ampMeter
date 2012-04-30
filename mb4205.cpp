@@ -77,12 +77,12 @@ void mb4205::timerEvent(QTimerEvent *)
 
         if(temp[temp.size()-1] == (char)0xff)
         {
-            double_dato = (double)( (int)temp_aux[0]*10000 +
-                                     (int)temp_aux[1]*1000 +
-                                     (int)temp_aux[2]*100 +
-                                     (int)temp_aux[3]*10 +
+            double_dato = ((temp_aux[0]&0xF0) > 0 ? -1 : 1) * (double)( (int)(temp_aux[0]&0x0F)*10000 +
+                                                                        (int)temp_aux[1]*1000 +
+                                                                        (int)temp_aux[2]*100 +
+                                                                        (int)temp_aux[3]*10 +
                                      (int)temp_aux[4] ) / 10000;
-            //qDebug() << "Datos hexadecimal" << _temp_aux.toHex() << _double_dato;
+            //qDebug() << "Datos hexadecimal" << temp_aux.toHex() << double_dato;
             emit dataRead(double_dato, _time.elapsed());
         }
     }

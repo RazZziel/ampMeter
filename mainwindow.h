@@ -31,7 +31,6 @@ private slots:
     void on_actionConstant_triggered();
     void on_actionSave_triggered();
     void on_actionLoad_triggered();
-
     void on_actionMB4205_triggered();
 
 private:

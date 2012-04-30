@@ -122,6 +122,8 @@ QwtPlotCurve *AmpPlot::getCurve()
 
 void AmpPlot::dataRead(double value, double time)
 {
+    emit dataRead(value);
+
     double size;
     _data.append(value);
     _dataTime.append(time+_pauseTime);

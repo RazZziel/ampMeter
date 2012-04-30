@@ -24,7 +24,7 @@
 
 #include "datasource.h"
 
-#define DEFAULT_X_MAX 10000
+#define DEFAULT_X_MAX 100000
 #define DEFAULT_Y_MAX 100
 
 class AmpPlot : public QObject
@@ -39,7 +39,9 @@ public:
     QwtPlotCurve *getCurve();
     void saveToCSV(QString fileName);
     void loadFromCSV(QString fileName);
+
 signals:
+    void dataRead(double value);
     void meanChanged(double mean);
 
 private slots:
