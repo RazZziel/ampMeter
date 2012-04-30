@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>738</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -66,6 +66,7 @@
      </property>
      <addaction name="actionRandom"/>
      <addaction name="actionConstant"/>
+     <addaction name="actionMB4205"/>
      <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="menuStyle">
@@ -148,6 +149,11 @@
   <action name="actionLoad">
    <property name="text">
     <string>&amp;Load</string>
+   </property>
+  </action>
+  <action name="actionMB4205">
+   <property name="text">
+    <string>MB4205</string>
    </property>
   </action>
  </widget>

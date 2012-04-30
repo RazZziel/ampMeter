@@ -23,22 +23,16 @@ public:
     ~MainWindow();
     
 private slots:
-
     void on_actionRandom_triggered();
-
     void on_actionAntialiasing_triggered();
-
     void on_actionQuit_triggered();
-
     void on_actionPause_triggered();
-
     void on_actionReset_triggered();
-
     void on_actionConstant_triggered();
-
     void on_actionSave_triggered();
-
     void on_actionLoad_triggered();
+
+    void on_actionMB4205_triggered();
 
 private:
     Ui::MainWindow *ui;

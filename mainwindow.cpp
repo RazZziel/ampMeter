@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mb4205.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     _amp->setDataSource(new RandomData());
     _amp->startRead();
+    ui->actionMB4205->trigger();
 }
 
 MainWindow::~MainWindow()
@@ -21,6 +23,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionRandom_triggered()
 {
     ui->actionConstant->setChecked(false);
+    ui->actionMB4205->setChecked(false);
     _amp->setDataSource(new RandomData());
     _amp->startRead();
 }
@@ -28,7 +31,16 @@ void MainWindow::on_actionRandom_triggered()
 void MainWindow::on_actionConstant_triggered()
 {
     ui->actionRandom->setChecked(false);
+    ui->actionMB4205->setChecked(false);
     _amp->setDataSource(new ConstantData());
+    _amp->startRead();
+}
+
+void MainWindow::on_actionMB4205_triggered()
+{
+    ui->actionConstant->setChecked(false);
+    ui->actionRandom->setChecked(false);
+    _amp->setDataSource(new mb4205());
     _amp->startRead();
 }
 
