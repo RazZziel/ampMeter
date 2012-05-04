@@ -53,6 +53,7 @@ private:
     QwtPlot *_plot;
     QwtPlotCurve *_dataCurve;
     QwtPlotCurve *_meanCurve;
+    QwtPlotCurve *_maxCurve;
     QwtPlotCurve *_currentMeanCurve;
     QwtPlotCurve *_loadedCurve;
     QwtPlotGrid *_grid;
@@ -64,6 +65,8 @@ private:
     QVector<double> _dataTime;
     QVector<double> _meanData;
     QVector<double> _meanTime;
+    QVector<double> _maxData;
+    QVector<double> _maxTime;
     QVector<double> _currentMeanData;
     QVector<double> _loadedData;
     QVector<double> _loadedTime;
@@ -71,6 +74,7 @@ private:
     double _xMax;
     double _yMax;
     double _mean;
+    double _max;
     double _sd; //Standard deviation
     double _pauseTime;
 

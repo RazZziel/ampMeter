@@ -35,6 +35,13 @@ LIBS += -L/home/imasdetres/dev/ampMeter
 LIBS += -lSerialPort
 #LIBS += -lqserialdevice
 #LIBS += -lserialportinfo
+#LIBS += -L/ \
+#             -Wl,-rpath,./lib \
+#LIBS += -L/home/imasdetres/dev/ampMeter -Wl,-rpath,/usr/lib -lSerialPort
+ #            -lqwt
+
+QMAKE_LFLAGS += -Wl,-rpath,\\$\$ORIGIN/lib/:\\$\$ORIGIN/../lib/
+
 
 
 INCLUDEPATH += /home/imasdetres/dev/ampMeter

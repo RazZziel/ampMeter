@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mb4205.h"
+#include <QSettings>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +13,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     _amp->setDataSource(new RandomData());
     _amp->startRead();
-    ui->actionMB4205->trigger();
+    connect(_amp, SIGNAL(dataRead(double)), ui->doubleSpinBox, SLOT(setValue(double)));
+
+
+    QSettings settings("/home/imasdetres/dev/ampMeter/mb4205Settings.ini", QSettings::IniFormat);
+    if (!settings.contains("dataSource"))
+        settings.setValue("dataSource","MB4205");
+    QString dataSource = settings.value("dataSource", "").toString();
+
+    if(dataSource == "Randon") {
+        ui->actionRandom->trigger();
+
+    }else if(dataSource == "Constant") {
+        ui->actionConstant->trigger();
+
+    }else if(dataSource == "MB4205") {
+        ui->actionMB4205->trigger();
+
+    }else
+        ui->actionMB4205->trigger();
+
 }
 
 MainWindow::~MainWindow()
@@ -42,7 +62,6 @@ void MainWindow::on_actionMB4205_triggered()
     ui->actionRandom->setChecked(false);
     _amp->setDataSource(new mb4205());
     _amp->startRead();
-    connect(_amp, SIGNAL(dataRead(double)), ui->doubleSpinBox, SLOT(setValue(double)));
 }
 
 void MainWindow::on_actionAntialiasing_triggered()

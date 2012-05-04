@@ -6,6 +6,7 @@
 #include "serialportinfo.h"
 #include "datasource.h"
 #include <QTimer>
+#include <QSettings>
 
 class mb4205 : public DataSource
 {
@@ -22,7 +23,6 @@ public slots:
 
 private:
     SerialPort _serialPort;
-
     int _timer;
     void MyTimer();
     QTimer *_timerq;

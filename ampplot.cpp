@@ -51,6 +51,11 @@ AmpPlot::AmpPlot(QwtPlot *plot)
     _meanCurve->setRenderHint(QwtPlotItem::RenderAntialiased);
     _meanCurve->setPen(QPen(Qt::red));
 
+    _maxCurve = new QwtPlotCurve("max");
+    _maxCurve->attach(_plot);
+    _maxCurve->setRenderHint(QwtPlotItem::RenderAntialiased);
+    _maxCurve->setPen(QPen(Qt::darkMagenta));
+
     _currentMeanCurve = new QwtPlotCurve("mean");
     _currentMeanCurve->attach(_plot);
     _currentMeanCurve->setRenderHint(QwtPlotItem::RenderAntialiased);
@@ -58,6 +63,7 @@ AmpPlot::AmpPlot(QwtPlot *plot)
 
     showCurve(_dataCurve, true);
     showCurve(_meanCurve, false);
+    showCurve(_maxCurve, false);
     showCurve(_currentMeanCurve, true);
 
     _time = new QTime();
@@ -68,7 +74,13 @@ AmpPlot::AmpPlot(QwtPlot *plot)
     _meanData.append(0.0);
     _meanTime.append(0.0);
 
+    _maxData.append(0.0);
+    _maxTime.append(0.0);
+    _maxData.append(0.0);
+    _maxTime.append(0.0);
+
     _pauseTime = 0;
+
 
     _dataSource = NULL;
 
@@ -95,7 +107,10 @@ void AmpPlot::startRead()
         _dataSource->startRead();
         _meanTime.first() = 0.0;
         _meanTime.last() = 0.0;
+        _maxTime.first() = 0.0;
+        _maxTime.last() = 0.0;
         _currentMeanData.clear();
+        _max = 0.0;
 
         _time->restart();
         _plot->setAxisScale(QwtPlot::xBottom,0, _xMax);
@@ -133,14 +148,23 @@ void AmpPlot::dataRead(double value, double time)
     _mean = (1 - (1/size))*_mean + (1/size)*value;
 //    _sd = ((size-1) * _sd + (value -_mean)*(value - lastMean))* (1 / size);
 
+    if (_max < value) {
+        _max = value;
+    }
+
     _meanData.first() = _mean;
     _meanData.last() = _mean;
     _meanTime.last() = _dataTime.last();
+
+    _maxData.first() = _max;
+    _maxData.last() = _max;
+    _maxTime.last() = _dataTime.last();
 
     _currentMeanData.append(_mean);
 
     _dataCurve->setRawSamples(_dataTime.data(), _data.data(), _data.size());
     _meanCurve->setRawSamples(_meanTime.data(), _meanData.data(), _meanTime.size());
+    _maxCurve->setRawSamples(_maxTime.data(), _maxData.data(), _maxTime.size());
     _currentMeanCurve->setRawSamples(_dataTime.data(), _currentMeanData.data(), _dataTime.size());
 
     emit meanChanged(_mean);
