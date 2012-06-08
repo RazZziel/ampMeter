@@ -39,9 +39,9 @@ void mb4205::timerEvent(QTimerEvent *)
     if (!_serialPort.isOpen())
     {
 
-        QSettings settings("/home/imasdetres/dev/ampMeter/mb4205Settings.ini", QSettings::IniFormat);
+        QSettings settings("./mb4205Settings.ini", QSettings::IniFormat);
         if (!settings.contains("port"))
-            settings.setValue("port","/dev/ttyUSB2");
+            settings.setValue("port","COM1");
         QString port = settings.value("port", "").toString();
 
         // Configure SerialPort
@@ -55,7 +55,7 @@ void mb4205::timerEvent(QTimerEvent *)
 
         if (!_serialPort.open(QIODevice::ReadOnly)){
             qWarning() << "Error: " << _serialPort.errorString();
-            //        QMessageBox::warning(this,"Conexion","Error de conexion");
+            //QMessageBox::warning(this,"Conexion","Error de conexion");
 
         }
     }
@@ -73,11 +73,17 @@ void mb4205::timerEvent(QTimerEvent *)
     {
         while (combuffer[i] != (char)0xfe) i++;
 
+        qDebug() << "i" << i << "combuffer" << combuffer;
+
         QByteArray temp = combuffer.mid(i,8);
         QByteArray temp_aux = combuffer.mid(1,5);
 
+        qDebug() << "temp" << temp << "size" << temp.size() << "temp_aux" << temp_aux << "size" << temp_aux.size();
+
         if(temp[temp.size()-1] == (char)0xff)
         {
+            qDebug() << "temp3";
+
             double double_dato = ((temp_aux[0]&0xF0) > 0 ? -1 : 1) * (double)( (int)(temp_aux[0]&0x0F)*10000 +
                                                                                (int)temp_aux[1]*1000 +
                                                                                (int)temp_aux[2]*100 +
