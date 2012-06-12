@@ -73,12 +73,11 @@ void mb4205::timerEvent(QTimerEvent *)
     {
         while (combuffer[i] != (char)0xfe) i++;
 
-        qDebug() << "i" << i << "combuffer" << combuffer;
+
 
         QByteArray temp = combuffer.mid(i,8);
         QByteArray temp_aux = combuffer.mid(1,5);
 
-        qDebug() << "temp" << temp << "size" << temp.size() << "temp_aux" << temp_aux << "size" << temp_aux.size();
 
         if(temp[temp.size()-1] == (char)0xff)
         {

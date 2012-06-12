@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_amp, SIGNAL(dataRead(double)), ui->doubleSpinBox, SLOT(setValue(double)));
 
 
-    //QSettings settings("/home/imasdetres/dev/ampMeter/mb4205Settings.ini", QSettings::IniFormat);
+
     QSettings settings("./mb4205Settings.ini", QSettings::IniFormat);
     if (!settings.contains("dataSource"))
         settings.setValue("dataSource","MB4205");
