@@ -37,11 +37,6 @@ win32 {
     LIBS += -LC:/Users/a/dev/serialport-build-Release/src/release
     LIBS += -lSerialPort
 
-    #LIBS += -L/C:/Users/a/dev/ampMeter/lib/win32/ -lqserialdevice
-
-    #LIBS += -LC:/Users/a/dev/ampMeter/lib/win32/SerialPort.a
-    #LIBS += -L/C:/Users/a/dev/ampMeter/lib/win32 -lSerialPort
-
     INCLUDEPATH += C:/Users/a/dev/ampMeter
     INCLUDEPATH += C:/Users/a/dev/Qwt-6.0.1/src
     INCLUDEPATH += C:/Users/a/dev/Qwt-6.0.1/include
