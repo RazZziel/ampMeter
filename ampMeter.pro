@@ -49,7 +49,7 @@ win32 {
 
 unix {
 
-    LIBS    +=  -lqwt
+    LIBS +=  -lqwt
     LIBS += -L/home/imasdetres/dev/ampMeter
     LIBS += -lSerialPort
 
