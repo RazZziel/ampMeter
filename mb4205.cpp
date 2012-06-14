@@ -35,7 +35,6 @@ void mb4205::MyTimer(){
 void mb4205::timerEvent(QTimerEvent *)
 {
 
-
     if (!_serialPort.isOpen())
     {
 
